@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OpenAI_API.Completions;
 using OpenAI_API;
-using Microsoft.VisualBasic;
+using OpenAI_API.Completions;
 using OpenAIServices.Helper;
 
 namespace OpenAIServices.Controllers
@@ -41,7 +40,6 @@ namespace OpenAIServices.Controllers
             #endregion
 
             return Ok(outputResult);
-
         }
     }
 }
