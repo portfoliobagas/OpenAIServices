@@ -40,6 +40,7 @@ namespace OpenAIServices.Controllers
             #endregion
 
             return Ok(outputResult);
+
         }
     }
 }
