@@ -15,26 +15,39 @@ namespace OpenAIServices.Controllers
             #region Initial Object and Variable
 
             string outputResult = "";
+            string conversationId = "";
+
+            char[] trimChars = { ' ', ',', '.', '?', '!', ':', '\t', '\n', '\r' };
+
             var openai = new OpenAIAPI(Constan.STR_KEY_OPENAI);
             CompletionRequest completionRequest = new CompletionRequest();
-            completionRequest.Prompt = prompt;
+
+            #endregion
+
+            #region Initial Personal Model GPT
+
+            prompt = Constan.STR_PERSONAL_1_MODEL_GPT + prompt;
 
             #endregion
 
             #region Set Model GPT
 
             completionRequest.Model = Constan.STR_MODEL_GPT;
-            completionRequest.MaxTokens = 100;
+            completionRequest.MaxTokens = 1024;
+            completionRequest.Prompt = prompt;
 
             #endregion
 
             #region Execute..
 
             var completions = await openai.Completions.CreateCompletionAsync(completionRequest);
+            conversationId = completions.Id; // Assuming a property exists
+
+
 
             foreach (var completion in completions.Completions)
             {
-                outputResult += completion.Text;
+                outputResult += completion.Text.Trim(trimChars);
             }
 
             #endregion
